@@ -54,31 +54,62 @@ def show_solution(grid, word, solution):
 
 def find(grid, word):
     size = get_size(grid)
+    # loop over all element and find the first letter
+    # insert the location of the first letter found in grid
     first_letter_locations = []
     for row_index in range(size[1]):
         for col_index in range(size[0]):
             if word[0] == grid[row_index][col_index]:
                 first_letter_locations.append((col_index, row_index))
-    print(first_letter_locations)
-    result_list = {}
+
+    # evaluate the next letter of the first letter found in grid
+    # if next letter matches the word, then insert into a dictionary,
+    # where key is first letter location, value is direction
+    result_dict = {}
     for first_letter_location in first_letter_locations:
         for direction in DIRECTIONS:
             next_x = first_letter_location[0] + direction[0]
             next_y = first_letter_location[1] + direction[1]
-            if word[1] == grid[next_y][next_x]:
-                result_list[first_letter_location] = direction
-    for location, direction in result_list.items():
+            if 0 <= next_x < size[0] and 0 <= next_y < size[1]:
+                if word[1] == grid[next_y][next_x]:
+                    result_dict[first_letter_location] = direction
+
+    # evaluate the rest of the letter 
+    # if the rest of the letters match the word, then do nothing
+    # else insert into remove_list with its first letter location
+    remove_list = []
+    for location, direction in result_dict.items():
         for i in range(2, len(word)):
             next_x = location[0] + i * direction[0]
             next_y = location[1] + i * direction[1]
-            if word[i] != grid[next_y][next_x]:
-                result_list.pop(location)
-    if result_list:
-        for location, direction in result_list.items():
-            result = (location, direction)
-        return result
+            if 0 <= next_x < size[0] and 0 <= next_y < size[1]:
+                if word[i] != grid[next_y][next_x]:
+                    remove_list.append(location)
+            else:
+                remove_list.append(location)
+
+    # check if any first letter location in remove_list
+    # remove element from the dictionary using first letter location
+    if remove_list:
+        for element in remove_list:
+            result_dict.pop(element)
+
+    # check if any result in the dictionary
+    # return false if no result in the dictionary
+    if result_dict:
+        result_list = []
+        for location, direction in result_dict.items():
+            result_list.append((location, direction))
+        return result_list
     else:
         return False
+
+def find_all(grid, word_list):
+    result_dictionary = {}
+    for word in word_list:
+        result = find(grid, word)
+        result_dictionary[word] = result
+    return result_dictionary
 
 RIGHT = (1, 0)
 DOWN = (0, 1)
@@ -103,5 +134,6 @@ grid = [
 # solution = ((1, 0), (0, 1))
 # show_solution(grid, "cat", solution)
 
-result = find(grid, "cxg")
-print(result)
+word_list = ["ktn"]
+res_list = find_all(grid, word_list)
+print(res_list)
