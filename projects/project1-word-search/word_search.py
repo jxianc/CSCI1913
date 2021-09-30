@@ -4,12 +4,14 @@ def get_size(grid):
     width = len(grid[0])
     return (width, height)
 
+
 def print_word_grid(grid):
     for row in grid:
-        word = ''
+        word = ""
         for letter in row:
             word += letter
         print(word)
+
 
 def copy_word_grid(grid):
     new_grid = []
@@ -20,10 +22,11 @@ def copy_word_grid(grid):
         new_grid.append(new_row)
     return new_grid
 
+
 def extract(grid, position, direction, max_len):
     size = get_size(grid)
     (x, y) = position
-    word = ''
+    word = ""
     for _ in range(0, max_len):
         if 0 <= x < size[0] and 0 <= y < size[1]:
             word += grid[y][x]
@@ -31,8 +34,9 @@ def extract(grid, position, direction, max_len):
             y += direction[1]
     return word
 
+
 def show_solution(grid, word, solution):
-    if solution == False: 
+    if solution == False:
         print("{} is not found in this word search".format(word))
     else:
         (x, y) = solution[0]
@@ -48,9 +52,11 @@ def show_solution(grid, word, solution):
                 found = False
                 break
         if found == True:
+            print("{} can be found as below".format(word.upper()))
             print_word_grid(copy_grid)
         else:
             print("{} is not found in this word search".format(word))
+
 
 def find(grid, word):
     size = get_size(grid)
@@ -74,7 +80,7 @@ def find(grid, word):
                 if word[1] == grid[next_y][next_x]:
                     result_dict[first_letter_location] = direction
 
-    # evaluate the rest of the letter 
+    # evaluate the rest of the letter
     # if the rest of the letters match the word, then do nothing
     # else insert into remove_list with its first letter location
     remove_list = []
@@ -104,12 +110,26 @@ def find(grid, word):
     else:
         return False
 
+
 def find_all(grid, word_list):
     result_dictionary = {}
     for word in word_list:
         result = find(grid, word)
         result_dictionary[word] = result
     return result_dictionary
+
+
+def generate(width, height):
+    grid = []
+    # generate empty grid with the size given
+    for _ in range(height):
+        row_list = []
+        for _ in range(width):
+            row_list.append(" ")
+        grid.append(row_list)
+
+    print_word_grid(grid)
+
 
 RIGHT = (1, 0)
 DOWN = (0, 1)
@@ -118,12 +138,13 @@ RIGHT_UP = (1, -1)
 DIRECTIONS = (RIGHT, DOWN, RIGHT_DOWN, RIGHT_UP)
 
 grid = [
-    ['p', 'c', 'n', 'd', 't', 'h', 'g'],
-    ['w', 'a', 'x', 'o', 'a', 'x', 'f'],
-    ['o', 't', 'w', 'g', 'd', 'r', 'k'],
-    ['l', 'j', 'p', 'i', 'b', 'e', 't'],
-    ['f', 'v', 'l', 't', 'o', 'w', 'n']
+    ["p", "c", "n", "d", "t", "h", "g"],
+    ["w", "a", "x", "o" "a", "x", "f"],
+    ["o", "t", "w", "g", "d", "r", "k"],
+    ["l", "j", "p", "i", "b", "e", "t"],
+    ["f", "v", "l", "t", "o", "w", "n"],
 ]
+
 
 # size = get_size(grid)
 # print("size: {}".format(size))
@@ -134,6 +155,6 @@ grid = [
 # solution = ((1, 0), (0, 1))
 # show_solution(grid, "cat", solution)
 
-word_list = ["ktn"]
-res_list = find_all(grid, word_list)
-print(res_list)
+# word_list = ["ktn"]
+# res_list = find_all(grid, word_list)
+# print(res_list)

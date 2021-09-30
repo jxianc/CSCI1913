@@ -1,5 +1,59 @@
 import math
 
+too_common_words = [
+    "the",
+    "be",
+    "to",
+    "of",
+    "and",
+    "a",
+    "in",
+    "that",
+    "have",
+    "I",
+    "it",
+    "for",
+    "not",
+    "on",
+    "with",
+    "he",
+    "as",
+    "you",
+    "do",
+    "at",
+    "this",
+    "but",
+    "his",
+    "by",
+    "from",
+    "they",
+    "we",
+    "say",
+    "her",
+    "she",
+    "or",
+    "an",
+    "will",
+    "my",
+    "one",
+    "all",
+    "would",
+    "there",
+    "their",
+    "what",
+    "so",
+    "up",
+    "out",
+    "if",
+    "about",
+    "who",
+    "get",
+    "which",
+    "go",
+    "me",
+]
+
+
 def count(words):
     counts = {}
     for word in words:
@@ -11,20 +65,24 @@ def count(words):
             counts[word] = 1
     return counts
 
+
+# calculate the normalization of given counts dictionary
+# return a normalized dictionary
 def normalize(word_dct):
     square_sum = 0
     for count in word_dct.values():
         square = count ** 2
         square_sum += square
     size = math.sqrt(square_sum)
-    normalized_dct = {}
+    nrm_dct = {}  # normalized dictionary
     for word, count in word_dct.items():
-        normalized_dct[word] = 0 if size == 0 else count / size
-    return normalized_dct
+        nrm_dct[word] = 0 if size == 0 else count / size  # avoiding divide by zero
+    return nrm_dct
+
 
 # comparing two normalized dictionary, if word(key) in nrm_dct1 does not exists in nrm_dct2,
 # then add the word as key, 0 as the value into nrm_dct2
-# and do the same thing in nrm_dct1
+# and do the same thing to nrm_dct1
 def compare(nrm_dct1, nrm_dct2):
     for word in nrm_dct1.keys():
         if word not in nrm_dct2.keys():
@@ -32,6 +90,7 @@ def compare(nrm_dct1, nrm_dct2):
     for word in nrm_dct2.keys():
         if word not in nrm_dct1.keys():
             nrm_dct1[word] = 0
+
 
 def word_count_distance(count1, count2):
     nrm_dct1 = normalize(count1)
@@ -43,11 +102,10 @@ def word_count_distance(count1, count2):
     distance_score = 2 - 2 * count_sum
     return distance_score
 
-too_common_words = ["the","be","to","of","and","a","in","that","have","I","it","for","not","on","with","he","as","you","do","at","this","but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there","their","what","so","up","out","if","about","who","get","which","go","me"]
 
 def most_common_word(counts):
     max_count = 0
-    mcw_set = set() # most common word set
+    mcw_set = set()  # most common word set
     for word, count in counts.items():
         if count > max_count and word not in too_common_words:
             max_count = count
@@ -55,6 +113,7 @@ def most_common_word(counts):
         if count == max_count and word not in too_common_words:
             mcw_set.add(word)
     return mcw_set
+
 
 def most_similar(samples):
     distance_score_with_pair = {}
