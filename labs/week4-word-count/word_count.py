@@ -53,7 +53,6 @@ too_common_words = [
     "me",
 ]
 
-
 def count(words):
     counts = {}
     for word in words:
@@ -64,7 +63,6 @@ def count(words):
         else:
             counts[word] = 1
     return counts
-
 
 # calculate the normalization of given counts dictionary
 # return a normalized dictionary
@@ -80,7 +78,6 @@ def normalize(counts):
             size  # avoiding divide by zero
     return nrm_dct
 
-
 # comparing two normalized dictionary, if word (key) in nrm_dct1 does not exists in nrm_dct2,
 # then add the word as key, 0 as the value into nrm_dct2
 # and do the same thing to nrm_dct1
@@ -92,7 +89,6 @@ def compare(nrm_dct1, nrm_dct2):
         if word not in nrm_dct1.keys():
             nrm_dct1[word] = 0
 
-
 def word_count_distance(count1, count2):
     nrm_dct1 = normalize(count1)
     nrm_dct2 = normalize(count2)
@@ -102,7 +98,6 @@ def word_count_distance(count1, count2):
         count_sum += nrm_dct1[word] * nrm_dct2[word]
     distance_score = 2 - 2 * count_sum
     return distance_score
-
 
 def most_common_word(counts):
     max_count = 0
@@ -117,14 +112,12 @@ def most_common_word(counts):
             mcw_set.add(word)
     return mcw_set
 
-
 def most_similar(samples):
     # dictionary (key: distance score, value: label pair)
     distance_score_with_pair = {}
     for first_label, first_counts in samples.items():
         for second_label, seocnd_counts in samples.items():
-            # prevent comparing itself, and skip if pair exist in dictionary
-            if first_label != second_label and (first_label, second_label) not in distance_score_with_pair.values():
+            if first_label != second_label:  # preventing comparing itself
                 distance_score = word_count_distance(
                     first_counts, seocnd_counts)
                 distance_score_with_pair[distance_score] = (
