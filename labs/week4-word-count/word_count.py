@@ -74,8 +74,7 @@ def normalize(counts):
     size = math.sqrt(square_sum)
     nrm_dct = {}  # normalized dictionary
     for word, count in counts.items():
-        nrm_dct[word] = 0 if size == 0 else count / \
-            size  # avoiding divide by zero
+        nrm_dct[word] = 0 if size == 0 else count / size  # avoiding divide by zero
     return nrm_dct
 
 # comparing two normalized dictionary, if word (key) in nrm_dct1 does not exists in nrm_dct2,

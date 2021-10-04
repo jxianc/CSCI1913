@@ -15,9 +15,7 @@ def print_word_grid(grid):
 def copy_word_grid(grid):
     new_grid = []
     for row in grid:
-        new_row = []
-        for letter in row:
-            new_row.append(letter)
+        new_row = row.copy()
         new_grid.append(new_row)
     return new_grid
 
@@ -156,7 +154,9 @@ grid = [
     ["f", "v", "l", "t", "o", "w", "n"],
 ]
 
-word_list = ['dog', 'cat', 'asd', 'aaaaaaaaaaa']
-(grid, inserted) = generate(15, 10, word_list)
-print_word_grid(grid)
-print("inserted words: {}".format(inserted))
+show_solution(grid, "cat", ((1, 0), (0, 1)))
+
+# word_list = ['dog', 'cat', 'asd', 'aaaaaaaaaaa']
+# (grid, inserted) = generate(15, 10, word_list)
+# print_word_grid(grid)
+# print("inserted words: {}".format(inserted))
