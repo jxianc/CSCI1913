@@ -108,11 +108,11 @@ def unsorted_closest(lst, value, costs):
     '''
     # a dictionary where the key is the difference between value and cost,
     # and the value is the house
-    diff_with_house = {}
+    diff_to_house = {}
     for house in lst:
         diff = abs(value - costs[house])
-        diff_with_house[diff] = house
-    return diff_with_house[min(diff_with_house.keys())]
+        diff_to_house[diff] = house
+    return diff_to_house[min(diff_to_house.keys())]
 
 def sorted_closest(lst, value, costs):
     '''
@@ -124,7 +124,6 @@ def sorted_closest(lst, value, costs):
     return:
         a product that is closest to the target value
     '''
-    # initialize low and high
     low = 0 
     high = len(lst) - 1
     # edge and corner case
