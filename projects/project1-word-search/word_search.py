@@ -243,11 +243,3 @@ DOWN = (0, 1)
 RIGHT_DOWN = (1, 1)
 RIGHT_UP = (1, -1)
 DIRECTIONS = (RIGHT, DOWN, RIGHT_DOWN, RIGHT_UP)
-
-grid = [
-    ["p", "c", "n", "d", "t", "h", "g"],
-    ["w", "a", "x", "o", "a", "x", "f"],
-    ["o", "t", "w", "g", "d", "r", "k"],
-    ["l", "j", "p", "i", "b", "e", "t"],
-    ["f", "v", "l", "t", "o", "w", "n"],
-]
