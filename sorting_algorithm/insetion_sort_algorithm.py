@@ -9,3 +9,5 @@ def insertion_sort(array):
         for i in range(first_unsorted_index, 0, -1):
             if array[i] < array[i - 1]:
                 swap(array, i, i - 1)
+
+print("asd")
