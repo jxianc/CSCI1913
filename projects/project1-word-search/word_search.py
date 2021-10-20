@@ -160,7 +160,7 @@ def generate(width, height, word_lst):
     inserted_word_list = []
     for word in word_lst:
         # try to insert the word 100 times
-        for _ in range(0, 101):
+        for _ in range(0, 100):
             location_direction = get_random_location_direction(width, height)
             result = verify_location_direction(grid, word, location_direction)
             # if result is true, the word is possible to insert
