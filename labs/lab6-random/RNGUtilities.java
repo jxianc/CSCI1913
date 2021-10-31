@@ -54,7 +54,7 @@ public class RNGUtilities {
      * @param min minimum value (inclusive)
      * @param max maximum value (exclusive)
      * @return returnArray generated random array
-     */
+     */ 
     public static int[] randomArray(int length, int min, int max) {
         int[] returnArray = new int[length];
         for (int i=0; i<length; i++) {
