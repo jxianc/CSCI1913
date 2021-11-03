@@ -21,7 +21,7 @@ public class NumberGuesser extends Game {
     }
 
     /**
-     * a method that pick a random secret number, reset the game setting (playerGuesses, playerSuccess)
+     * a method that pick a random secret number, reset the game settings (playerGuesses, playerSuccess)
      * and return a starting message to user
      * @return a starting message
      */
@@ -50,6 +50,7 @@ public class NumberGuesser extends Game {
     @Override
     protected boolean isValid(String move) {
         if (move == null) return false;
+        if (move.equals("quit")) return true;
         int playerNumber = 0;
         try {
             playerNumber = Integer.parseInt(move);
@@ -82,7 +83,7 @@ public class NumberGuesser extends Game {
 
     /**
      * a method that show a message indicate what was the secret number
-     * @return a string messag to inform player about the secret number
+     * @return a string message to inform player about the secret number
      */
     @Override
     protected String finalMessage() {

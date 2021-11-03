@@ -14,16 +14,15 @@ public abstract class Game {
         while(!isOver()) {
             System.out.print("Enter Your Move or ’quit ’ to quit > ");
             String move = user.nextLine();
-            if (move.equals("quit")) break;
             while (!isValid(move)) {
                 System.out.print("Invalid Move! try again > ");
                 move = user.nextLine();
             }
+            if (move.equals("quit")) break;
             String response = processMove(move);
             System.out.println(response);
         }
         String finalMessage = finalMessage();
-        System.out.println(finalMessage);
-        
+        System.out.println(finalMessage);   
     }
 }
