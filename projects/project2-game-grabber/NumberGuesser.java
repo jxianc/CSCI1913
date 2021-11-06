@@ -5,14 +5,14 @@ public class NumberGuesser extends Game {
     private int maxGuesses;
     private Random rng;
     private int secretNumber;
-    private int playerGuesses;
-    private boolean playerSuccess;  
+    private int userGuesses;
+    private boolean userSuccess;  
 
     /**
      * constructor for NumberGuesser class
      * @param rng a Random class object to generate a random number
      * @param maxNumber maximum range for generating a random number (inclusive)
-     * @param maxGuesses maximum number of player's guesses 
+     * @param maxGuesses maximum number of user's guesses 
      */
     public NumberGuesser(Random rng, int maxNumber, int maxGuesses) {
         this.rng = rng;
@@ -21,69 +21,69 @@ public class NumberGuesser extends Game {
     }
 
     /**
-     * a method that pick a random secret number, reset the game settings (playerGuesses, playerSuccess)
+     * method that picks a random secret number and resets the game settings (userGuesses, userSuccess)
      * and return a starting message to user
      * @return a starting message
      */
     @Override
     protected String prepToPlay() {
         secretNumber = rng.nextInt(maxNumber) + 1;
-        playerGuesses = 0;
-        playerSuccess = false;
+        userGuesses = 0;
+        userSuccess = false;
         return "I' ve picked a number 1 to " + maxNumber + ". You get " + maxGuesses + " guesses to guess it";
     }
 
     /**
-     * a method that check the game is over or not
-     * @return a boolean value shows that the game is over or not
+     * method that checks if the current state of the game is done (win or lose)
+     * @return a boolean value of the current game is over
      */
     @Override
     protected boolean isOver() {
-        return maxGuesses == playerGuesses || playerSuccess;
+        return maxGuesses == userGuesses || userSuccess;
     }
 
     /**
-     * a method that validate player's move (check if input is a number)
-     * @param move a string value of player's move
-     * @return a boolean value shows that player's move is valid or not
+     * method that checks if the given string represents a valid move by checking if the move is a number
+     * @param move a string representation of user's move
+     * @return a boolean value of the given string is a valid move
      */
     @Override
     protected boolean isValid(String move) {
         if (move == null) return false;
         if (move.equals("quit")) return true;
-        int playerNumber = 0;
+        int userNumber = 0;
         try {
-            playerNumber = Integer.parseInt(move);
+            userNumber = Integer.parseInt(move);
         } catch(Exception e) {
             return false;
         }
-        return 1 <= playerNumber && playerNumber <= maxNumber;
+        return 1 <= userNumber && userNumber <= maxNumber;
     }
 
     /**
-     * a method that convert player's move to integer and compare to secret number 
-     * then show a message to indicate if player's guess was correct or too high or too low
-     * @param move a string value of player's move
-     * @return a string message to inform player 
+     * method that takes a valid move and updates the game state based on the user’s move
+     * then return a update message to indicate if user's guess was correct or too high or too low
+     * @param move a string representation of user's move
+     * @return a update message for user (too high, too low, that's it)
      */
     @Override
     protected String processMove(String move) {
-        int playerMove = Integer.parseInt(move);
-        if (playerMove > secretNumber) {
-            playerGuesses += 1;
+        int userMove = Integer.parseInt(move);
+        if (userMove > secretNumber) {
+            userGuesses += 1;
             return "Too High";
-        } else if (playerMove < secretNumber) {
-            playerGuesses += 1;
+        } else if (userMove < secretNumber) {
+            userGuesses += 1;
             return "Too Low";
         } else {
-            playerSuccess = true;
+            userSuccess = true;
             return "That's it!";
         }
     }
 
     /**
-     * a method that show a message indicate what was the secret number
-     * @return a string message to inform player about the secret number
+     * method that returns a final message to user
+     * @return a final message to inform user what was the secret number
      */
     @Override
     protected String finalMessage() {
@@ -91,7 +91,7 @@ public class NumberGuesser extends Game {
     }
 
     /**
-     * a method that get the name of the game
+     * method that get the name of the game
      * @return name of the game
      */
     @Override
