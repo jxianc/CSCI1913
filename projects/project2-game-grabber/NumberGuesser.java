@@ -1,5 +1,14 @@
+// Jingxian Chai
+
 import java.util.Random;
 
+/**
+ * This class implements a number guessing game,
+ * the game will choose a secret number, and show the range to user,
+ * user can guesses a number each time, if user guesses the right number, the user wins,
+ * else the user will be informed if the number is too high or too low.
+ * User will be given a maximum number of guesses they are allowed to guess
+ */
 public class NumberGuesser extends Game {
     private int maxNumber;
     private int maxGuesses;
@@ -30,7 +39,7 @@ public class NumberGuesser extends Game {
         secretNumber = rng.nextInt(maxNumber) + 1;
         userGuesses = 0;
         userSuccess = false;
-        return "I' ve picked a number 1 to " + maxNumber + ". You get " + maxGuesses + " guesses to guess it";
+        return "I've picked a number 1 to " + maxNumber + ". You get " + maxGuesses + " guesses to guess it";
     }
 
     /**

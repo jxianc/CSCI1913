@@ -1,5 +1,11 @@
+// Jingxian Chai
+
 import java.util.Random;
 
+/**
+ * This class implements "rock, paper, scissors" game.
+ * User will be given a number of turns he has to win, and a maximum number of turns he can loses.
+ */
 public class RPS extends Game {
     private Random rng;
     private int requiredWins;  
@@ -125,5 +131,4 @@ public class RPS extends Game {
     public String getName() {
         return "Rock Paper Scissors";
     }
-
 }

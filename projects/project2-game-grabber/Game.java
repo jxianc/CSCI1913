@@ -1,5 +1,10 @@
+// Jingxian Chai
+
 import java.util.Scanner;
 
+/**
+ * Games class is an abstract class, represents the main structure of a game
+ */
 public abstract class Game {
     /**
      * method that updates the state of the object to be the beginning of a new game
@@ -48,10 +53,10 @@ public abstract class Game {
         String initialMessage = prepToPlay();
         System.out.println(initialMessage);
         while(!isOver()) {
-            System.out.print("Enter Your Move or 'quit' to quit > ");
+            System.out.print("Enter Your Move or 'quit' to quit> ");
             String move = user.nextLine();
             while (!isValid(move)) {
-                System.out.print("Invalid Move! try again > ");
+                System.out.print("Invalid Move! try again> ");
                 move = user.nextLine();
             }
             if (move.equals("quit")) break;

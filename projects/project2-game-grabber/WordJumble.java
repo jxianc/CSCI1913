@@ -1,5 +1,12 @@
+// Jingxian Chai
+
 import java.util.Random;
 
+/**
+ * This class implements the game called "Word Jumble",
+ * the game will choose a secret word then shuffle it, and show it to the user,
+ * user will be given a maximum number of guesses they are allowed to guess.
+ */
 public class WordJumble extends Game {
     private WordsList wl;
     private Random rng;
@@ -27,6 +34,9 @@ public class WordJumble extends Game {
         this.maxGuesses = maxGuesses;
     }
 
+    /**
+     * method that shuffle the secret word using Fisher-Yates shuffle algorithm
+     */
     private void jumble() {
         char[] charArray = secretWord.toCharArray();
         for (int i=charArray.length-1; i>=0; i--) {
@@ -53,7 +63,7 @@ public class WordJumble extends Game {
     }
 
     /**
-     * method that checks if the current state of the game is done (win or lose)
+     * method that checks if the current state of the game is done (win or loses)
      * @return a boolean value of the current game is over
      */
     @Override

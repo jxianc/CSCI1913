@@ -1,10 +1,18 @@
+// Jingxian Chai
+
+/**
+ * This class implement the game called "Hangman",
+ * the game will choose a secret word and show the word length, by displaying a series of blank,
+ * user can guesses a letter each time, if the user guesses a letter that is in the word, the letter will be revealed.
+ * User will be given a maximum number of guesses they are allowed to guess.
+ */
 public class Hangman extends Game {
     private WordsList words;
     private int minWordLen;
     private int maxWordLen;
     private int maxGuesses;
     private String secretWord;
-    private String hint = "_";
+    private String hint;
     private int userGuesses;
     private int userRightGuesses;
 
@@ -23,17 +31,18 @@ public class Hangman extends Game {
     }
 
     /**
-     * method that picks a random secret word and resets the game settings (hint, userGuesses, userRightGuess)
+     * method that picks a random secret word and resets the game settings (hint, userGuesses, userRightGuesses)
      * and return a starting message to user
      * @return a starting message
      */
     @Override
     protected String prepToPlay() {
         secretWord = words.getWord(minWordLen, maxWordLen);
+        hint = "_";
         hint = hint.repeat(secretWord.length());
         userGuesses = 0;
         userRightGuesses = 0;
-        return "I’ve picked a " + secretWord.length() + " letter word. Guess letters you think are in the word. You get " + maxGuesses + " guesses.";
+        return "I've picked a " + secretWord.length() + " letter word. Guess letters you think are in the word. You get " + maxGuesses + " guesses.";
     }
 
     /**
@@ -75,7 +84,7 @@ public class Hangman extends Game {
      */
     @Override
     protected String processMove(String move) {
-        if (secretWord.contains(move)) {
+        if (secretWord.contains(move) && !hint.contains(move)) {
             int index = -1;
             do {
                 index = secretWord.indexOf(move, index + 1);
@@ -85,7 +94,7 @@ public class Hangman extends Game {
             } while (index != -1);
         }
         userGuesses += 1;
-        return hint + " " + secretWord;
+        return hint;
     }
 
     /**

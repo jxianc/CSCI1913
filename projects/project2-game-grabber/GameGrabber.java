@@ -1,6 +1,12 @@
+// Jingxian Chai
+
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * GameGrabber class represents a menu system for all of the games, this class will store an array of games,
+ * display the menu and run the game when the user insert the game number
+ */
 public class GameGrabber {
     private Game[] games;
     private Scanner user;
@@ -10,7 +16,7 @@ public class GameGrabber {
      * @param games
      * @param user
      */
-    GameGrabber(Game[] games, Scanner user) {
+    public GameGrabber(Game[] games, Scanner user) {
         this.games = games;
         this.user = user;
     }
@@ -51,6 +57,9 @@ public class GameGrabber {
             do {
                 System.out.print("Pick a game (0-" + games.length + ") ");
                 input = user.nextLine();
+                while (input.length() == 0) {
+                    input = user.nextLine();
+                }
             } while (!isValid(input));
             int option = Integer.parseInt(input);
             if (option == games.length) {
@@ -69,7 +78,6 @@ public class GameGrabber {
         NumberGuesser ng = new NumberGuesser(rng, 1000, 10);
         RPS rps = new RPS(rng, 3, 3);
         WordJumble wj = new WordJumble(words, rng, 5, 15, 20);
-
         Game[] games = { hm, ng, rps, wj };
         Scanner user = new Scanner(System.in);
         GameGrabber gameGrabber = new GameGrabber(games, user);
