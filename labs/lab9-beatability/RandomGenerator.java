@@ -1,3 +1,5 @@
+// Jingxian Chai
+
 public interface RandomGenerator<T> {
     /**
      * method that return the given type

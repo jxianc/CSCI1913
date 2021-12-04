@@ -1,3 +1,5 @@
+// Jingxian Chai
+
 public class DeckOfCards implements RandomGenerator<Hand> {
     /**
      * method tha return a random hand with three randomly chosen cards from 1 to 13 (inclusive)

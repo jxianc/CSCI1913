@@ -1,7 +1,9 @@
+// Jingxian Chai
+
 public class BeatabilityEstimator {
     /**
      * method that estimate the beatability
-     * @param <T> type 
+     * @param <T> type parameter 
      * @param t object of the parameterized type that is comparable to itself
      * @param rg an instance of a class T implements RandomGenerator
      * @param trials number of trials to compare

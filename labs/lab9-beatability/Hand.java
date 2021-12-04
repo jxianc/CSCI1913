@@ -1,3 +1,5 @@
+// Jingxian Chai
+
 public class Hand implements Comparable<Hand> {
     private int card0;
     private int card1;
