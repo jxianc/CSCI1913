@@ -42,7 +42,7 @@ public class LinkedCounter<T> {
     }
 
     /**
-     * method that increment the count for given element
+     * method that increment the count for given element and return the count of the element
      * @param elem given element
      * @return the count of the element
      */
@@ -60,44 +60,52 @@ public class LinkedCounter<T> {
     }
 
     /**
-     * method that decrement the count for given element
+     * method that return the parent of the node with the given element
+     * @param elem given element
+     * @return parent node
+     */
+    private CountNode<T> getParentNode(T elem) {
+        CountNode<T> node = this.head;
+        if (node == null) return null;
+        while (node.getNext() != null && !isEqual(node.getNext().getData(), elem)) {
+            node = node.getNext();
+        }
+        return node;
+    }
+
+    /**
+     * method that decrement the count for given element and return the count of the element
      * @param elem given element
      * @return the count of the element
      */
     public int countDown(T elem) {
-        // linkedCounter is empty
+        // counter is empty, do nothing
         if (isEmpty()) return 0;
 
         CountNode<T> node = this.head;
-        if (isEqual(node.getData(), elem)) {    
-            // the head holds the given element
+        // check if the head holds the element
+        if (isEqual(node.getData(), elem)) {
             node.countDown();
             this.sum -= 1;
-            if (node.getCount() <= 0) {     
-                // count is zero, remove the node
+            // remove node
+            if (node.getCount() <= 0) {
                 this.head = node.getNext();
                 this.size -= 1;
             }
             return node.getCount();
-        }
-
-        CountNode<T> prevNode = null;
-        while (node != null && !isEqual(node.getData(), elem)) {
-            prevNode = node;
-            node = node.getNext();
-        }
-        if (node != null) {
+        } else {
+            CountNode<T> parent = getParentNode(elem);
+            node = parent.getNext();
+            // check if parent or node is null
+            if (parent == null || node == null) return 0;
             node.countDown();
             this.sum -= 1;
+            // remove node
             if (node.getCount() <= 0) {
-                // count is zero, remove the node
-                prevNode.setNext(node.getNext());
+                parent.setNext(node.getNext());
                 this.size -= 1;
             }
             return node.getCount();
-        } else {
-            // the element does not exists
-            return 0;
         }
     }
 
@@ -121,7 +129,7 @@ public class LinkedCounter<T> {
 
     /**
      * method that return the sum of counts of all elements
-     * @return
+     * @return sum of counts of all elements
      */
     public int getSum() {
         return this.sum;
