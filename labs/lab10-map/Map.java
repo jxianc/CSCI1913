@@ -11,13 +11,14 @@ public class Map<Key, Value> {
      * @param length size of the map
      */
     public Map(int length) {
+        
         if (length <= 0) {
             length = 1;
         }
         size = length;
         count = 0;
-        keys = (Key[]) new Object[length];
-        values = (Value[]) new Object[length];
+        keys = (Key[]) new Object[size];
+        values = (Value[]) new Object[size];
     }
 
     /**
