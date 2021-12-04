@@ -14,7 +14,6 @@ public class Hangman extends Game {
     private String secretWord;
     private String hint;
     private int userGuesses;
-    private int userRightGuesses;
 
     /**
      * constructor for Hangman class
@@ -31,7 +30,7 @@ public class Hangman extends Game {
     }
 
     /**
-     * method that picks a random secret word and resets the game settings (hint, userGuesses, userRightGuesses)
+     * method that picks a random secret word and resets the game settings (hint, userGuesses)
      * and return a starting message to user
      * @return a starting message
      */
@@ -41,7 +40,6 @@ public class Hangman extends Game {
         hint = "_";
         hint = hint.repeat(secretWord.length());
         userGuesses = 0;
-        userRightGuesses = 0;
         return "I've picked a " + secretWord.length() + " letter word. Guess letters you think are in the word. You get " + maxGuesses + " guesses.";
     }
 
@@ -51,7 +49,7 @@ public class Hangman extends Game {
      */
     @Override
     protected boolean isOver() {
-        return maxGuesses == userGuesses || userRightGuesses == secretWord.length();
+        return maxGuesses == userGuesses || hint.equals(secretWord);
     }
 
     /**
@@ -73,7 +71,6 @@ public class Hangman extends Game {
      */
     private void updateHint(int index, String move) {
         hint = hint.substring(0, index) + move + hint.substring(index+1);
-        userRightGuesses += 1;
     }
 
     /**

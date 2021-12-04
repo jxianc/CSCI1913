@@ -50,8 +50,7 @@ public abstract class Game {
      * @param user a scanner object for interacting with the user
      */
     public void play(Scanner user) {
-        String initialMessage = prepToPlay();
-        System.out.println(initialMessage);
+        System.out.println(prepToPlay());
         while(!isOver()) {
             System.out.print("Enter Your Move or 'quit' to quit> ");
             String move = user.nextLine();
@@ -65,7 +64,6 @@ public abstract class Game {
                 System.out.println(response);
             }
         }
-        String finalMessage = finalMessage();
-        System.out.println(finalMessage);   
+        System.out.println(finalMessage());   
     }
 }

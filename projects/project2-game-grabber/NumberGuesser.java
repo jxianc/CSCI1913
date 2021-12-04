@@ -15,7 +15,7 @@ public class NumberGuesser extends Game {
     private Random rng;
     private int secretNumber;
     private int userGuesses;
-    private boolean userSuccess;  
+    private int userNumber;
 
     /**
      * constructor for NumberGuesser class
@@ -30,15 +30,15 @@ public class NumberGuesser extends Game {
     }
 
     /**
-     * method that picks a random secret number and resets the game settings (userGuesses, userSuccess)
+     * method that picks a random secret number and resets the game settings (userGuesses)
      * and return a starting message to user
      * @return a starting message
      */
     @Override
     protected String prepToPlay() {
         secretNumber = rng.nextInt(maxNumber) + 1;
+        userNumber = 0;
         userGuesses = 0;
-        userSuccess = false;
         return "I've picked a number 1 to " + maxNumber + ". You get " + maxGuesses + " guesses to guess it";
     }
 
@@ -48,7 +48,7 @@ public class NumberGuesser extends Game {
      */
     @Override
     protected boolean isOver() {
-        return maxGuesses == userGuesses || userSuccess;
+        return maxGuesses == userGuesses || userNumber == secretNumber;
     }
 
     /**
@@ -77,15 +77,14 @@ public class NumberGuesser extends Game {
      */
     @Override
     protected String processMove(String move) {
-        int userMove = Integer.parseInt(move);
-        if (userMove > secretNumber) {
+        userNumber = Integer.parseInt(move);
+        if (userNumber > secretNumber) {
             userGuesses += 1;
             return "Too High";
-        } else if (userMove < secretNumber) {
+        } else if (userNumber < secretNumber) {
             userGuesses += 1;
             return "Too Low";
         } else {
-            userSuccess = true;
             return "That's it!";
         }
     }

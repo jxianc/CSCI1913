@@ -16,7 +16,7 @@ public class WordJumble extends Game {
     private String secretWord;
     private String jumbledWord;
     private int userGuesses;
-    private boolean userSuccess;
+    private String userWord;
 
     /**
      * constructor for WordJumble class
@@ -49,7 +49,7 @@ public class WordJumble extends Game {
     }
 
     /**
-     * method that picks a random secret word and resets the game settings (userGuesses, userSuccess)
+     * method that picks a random secret word and resets the game settings (userGuesses, userWord)
      * and return a starting message to user
      * @return a starting message
      */
@@ -58,7 +58,7 @@ public class WordJumble extends Game {
         secretWord = wl.getWord(minWordLen, maxWordLen);
         jumble();
         userGuesses = 0;
-        userSuccess = false;
+        userWord = "";
         return "The following is a jumbled up word: " + jumbledWord + " You get " + maxGuesses + " guesses to guess it";
     }
 
@@ -68,7 +68,7 @@ public class WordJumble extends Game {
      */
     @Override
     protected boolean isOver() {
-        return userGuesses == maxGuesses || userSuccess;
+        return userGuesses == maxGuesses || userWord.equals(secretWord);
     }
 
     /**
@@ -78,8 +78,7 @@ public class WordJumble extends Game {
      */
     @Override
     protected boolean isValid(String move) {
-        if (move == null) return false;
-        return true;
+        return move == null ? false : true;
     }
 
     /**
@@ -90,13 +89,9 @@ public class WordJumble extends Game {
      */
     @Override
     protected String processMove(String move) {
-        if (move.equals(secretWord)) {
-            userSuccess = true;
-            return null;
-        } else {
-            userGuesses += 1;
-            return "That's not it";
-        }
+        userWord = move;
+        userGuesses += 1;
+        return userWord.equals(secretWord) ? null : "That's not it";
     }
 
     /**

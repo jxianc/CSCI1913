@@ -57,9 +57,6 @@ public class GameGrabber {
             do {
                 System.out.print("Pick a game (0-" + games.length + ") ");
                 input = user.nextLine();
-                while (input.length() == 0) {
-                    input = user.nextLine();
-                }
             } while (!isValid(input));
             int option = Integer.parseInt(input);
             if (option == games.length) {
