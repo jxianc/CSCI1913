@@ -1,4 +1,4 @@
-# CSCI 1913
+# CSCI 1913 Fall 2021
 
 ### Introduction to Algorithms and Program Development
 
